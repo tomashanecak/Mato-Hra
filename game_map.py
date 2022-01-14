@@ -7,7 +7,7 @@ level_map = [
 "     xxxx                      ",
 "          x                    ",
 "          x   xxxx             ",
-"       p  x                    ",
+"    c  p  x                    ",
 " xxxxxxxxxxx  xx xxxxxxxxxxxx  "]
 
 block_size = 64

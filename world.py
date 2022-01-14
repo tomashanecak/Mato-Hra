@@ -2,6 +2,7 @@ import pygame, sys
 from settings import *
 from assets import assets
 from block import Block
+from coin import Coin
 from player import Player
 from game_map import *
 
@@ -20,6 +21,7 @@ class World:
     
     def setup_level(self, level_map):
         self.blocks = pygame.sprite.Group()
+        self.coins = pygame.sprite.Group()
         self.player = pygame.sprite.GroupSingle()
 
         for row_i, row in enumerate(level_map):
@@ -29,6 +31,11 @@ class World:
                     y = row_i * block_size
                     block= Block((x,y), block_size)
                     self.blocks.add(block)
+                if col == "c":
+                    x = col_i * block_size
+                    y = row_i * block_size
+                    coin = Coin((x,y), block_size)
+                    self.coins.add(coin)
                 if col == "p":
                     x = col_i * block_size
                     y = row_i * block_size
@@ -124,16 +131,25 @@ class World:
                 player.rect.bottom = tile.rect.bottom + player.rect.height
                 player.block_movement = True
 
+    def check_coin_collision(self):
+        collided_coins = pygame.sprite.spritecollide(self.player.sprite,self.coins,True)
+
+        
+
 
     def display(self):
         self.screen.blit(self.sky_surf, self.sky_rect)
         self.blocks.update(self.world_shift)
         self.blocks.draw(self.screen)
+        self.coins.update(self.world_shift)
+        self.coins.draw(self.screen)
         self.move_cam()
 
         self.player.update()
         self.horizontal_collision()
         self.vertical_collision()
         self.player.draw(self.screen)
+
+        self.check_coin_collision()
         
         
