@@ -124,7 +124,7 @@ class World:
                 player.direction.y = 0
                 player.rect.bottom = tile.rect.top
 
-                # DONE Fix Bug - Inblock the movement when player lands
+                # DONE Fix Bug - Unblock the movement when player lands
                 player.block_movement = False
             elif player.direction.y < 0:
                 player.direction.y = 0
